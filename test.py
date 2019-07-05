@@ -3,7 +3,7 @@
 import numpy as np
 from math import sin, cos, tan, pi
 import vtk
-from test-vtk import vtkWindow, Revolute
+from test_vtk import vtkWindow, Revolute
 
 L1 = 52
 L2 = 89
@@ -22,12 +22,13 @@ params = {
     5: {'a': L4, 'alpha': 0, 'd': 0, 'theta': 0}
 }
 
+
 class Mathematics(object):
     def rot2rpy(self, rot):
-        return (0,0,0)
+        return (0, 0, 0)
 
 
-class Model(Mathematics):
+class Kinematics(Mathematics):
     transform = np.eye(4)
     t = []
     #
@@ -78,20 +79,27 @@ class Model(Mathematics):
     def __str__(self):
         r, p, y = self.rot2rpy(self.transform)
         s = "Translation: {:.1f} {:.1f} {:.1f}  Rotation: {:.2f} {:.2f} {:.2f}".format(
-            self.transform[0,3],
-            self.transform[1,3],
-            self.transform[2,3],
+            self.transform[0, 3],
+            self.transform[1, 3],
+            self.transform[2, 3],
             r, p, y
         )
         return s
 
 
-class Part(Model, Revolute):
-    def __init__(self, params):
+class Model():
+    def __init__(self):
+        self.kine = Kinematics()
+        self.links = []
+
+    def make(self, params):
+        self.create(params)
+        for t in self.kine.t:
+            r = Revolute()
 
 
 
 m = Model()
-m.create(params)
+m.make(params)
 print(m.transform)
 print(m)
