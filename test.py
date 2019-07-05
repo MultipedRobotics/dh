@@ -3,7 +3,7 @@
 import numpy as np
 from math import sin, cos, tan, pi
 import vtk
-from test-vtk import vtkWindow
+from test-vtk import vtkWindow, Revolute
 
 L1 = 52
 L2 = 89
@@ -28,9 +28,12 @@ class Mathematics(object):
 
 
 class Model(Mathematics):
-    def __init__(self):
-        self.transform = np.eye(4)
-        self.t = []
+    transform = np.eye(4)
+    t = []
+    #
+    # def __init__(self):
+    #     self.transform = np.eye(4)
+    #     self.t = []
 
     def makeT(self, a, alpha, d, theta):
         """
@@ -81,6 +84,11 @@ class Model(Mathematics):
             r, p, y
         )
         return s
+
+
+class Part(Model, Revolute):
+    def __init__(self, params):
+
 
 
 m = Model()
