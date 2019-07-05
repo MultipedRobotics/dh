@@ -11,13 +11,19 @@
 
 import vtk
 
-def np2vtk(mat):
-    if mat.shape == (4, 4):
-        obj = vtk.vtkMatrix4x4()
-        for i in range(4):
-            for j in range(4):
-                obj.SetElement(i, j, mat[i, j])
-        return obj
+def n2v(n):
+    if n.shape == (4, 4):
+        # v = vtk.vtkMatrix4x4()
+        v = vtk.vtkTransform()
+        m = v.GetMatrix()
+        # for i in range(4):
+        #     for j in range(4):
+        #         m.SetElement(i, j, n[i, j])
+                # v[i,j] = n[i,j]
+        # v.SetMatrix(m)
+        return v
+    else:
+        raise Exception("n2v: need 4x4 transform, got", mat.shape)
 
 
 class Link:
@@ -61,6 +67,7 @@ class Revolute(Link):
 
         if transform:
             self.actor.SetUserTransform(transform)
+            # SetUserMatrix(transforms.np2vtk(t)) # difference?
 
         # print(self.actor.GetBounds())
         # print(self.actor, self.actor.GetActors())
