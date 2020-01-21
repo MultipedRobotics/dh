@@ -1,6 +1,9 @@
 # Modified DH
 
 [![Actions Status](https://github.com/MultipedRobotics/dh/workflows/CheckPackage/badge.svg)](https://github.com/MultipedRobotics/dh/actions)
+![GitHub](https://img.shields.io/github/license/multipedrobotics/dh)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mdh)
+![PyPI](https://img.shields.io/pypi/v/mdh)
 
 ## Inspiration
 
