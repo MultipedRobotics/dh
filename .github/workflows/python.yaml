@@ -1,4 +1,4 @@
-name: Nose
+name: Check Package
 on: [push]
 
 jobs:
@@ -37,6 +37,10 @@ jobs:
               run: poetry config virtualenvs.create false
             - name: Install packages
               run: poetry install
+            - name: Run PyTest
+              run: poetry run pytest
+            - name: Run mypy
+              run: poetry run mypy
             # - name: nosetests
             #   run: |
             #     pip install nose
