@@ -1,3 +1,8 @@
 .DS_Store
 *.pyc
 ._*
+*.egg-info
+.pytest_cache
+.ipynb_checkpoints
+__pycache__
+.mypy_*

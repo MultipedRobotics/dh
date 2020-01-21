@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "mdh"
+version = "0.1.0"
+description = "modified dh"
+authors = ["walchko <walchko@users.noreply.github.com>"]
+readme = "readme.md"
+license = "MIT"
+homepage = ""
+repository = 'http://github.com/MomsFriendlyRobotCompany/mdh'
+# documentation = "http://..."
+keywords = ["serial manipulators", "robotics", "kinematics", "dh"]
+classifiers = [
+    'Development Status :: 4 - Beta',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3.7',
+    'Topic :: Software Development :: Libraries',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+    'Topic :: Software Development :: Libraries :: Application Frameworks'
+]
+
+# [tool.poetry.scripts]
+# script_name = 'myscript:main'
+
+[tool.poetry.dependencies]
+python = ">=3.6"
+numpy = ">=1.9"
+scipy = ">=1.0"
+attrs = ">=19.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+mypy = "*"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
