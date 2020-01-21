@@ -2,6 +2,8 @@
 *.pyc
 ._*
 *.egg-info
+build
+dist
 .pytest_cache
 .ipynb_checkpoints
 __pycache__
