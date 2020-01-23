@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "mdh"
-version = "0.1.0"
+version = "0.1.1"
 description = "modified dh"
 authors = ["walchko <walchko@users.noreply.github.com>"]
 readme = "readme.md"
 license = "MIT"
-homepage = ""
+homepage = "https://pypi.org/project/mdh/"
 repository = 'http://github.com/MomsFriendlyRobotCompany/mdh'
 # documentation = "http://..."
 keywords = ["serial manipulators", "robotics", "kinematics", "dh"]
