@@ -17,3 +17,4 @@ module for my needs:
 
 - [pybotics](https://github.com/nnadeau/pybotics)
 - [pytransform3d](https://github.com/rock-learning/pytransform3d)
+- [robopy](https://github.com/MultipedRobotics/robopy)
