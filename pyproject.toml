@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "mdh"
-version = "0.1.1"
+version = "0.1.2"
 description = "modified dh"
 authors = ["walchko <walchko@users.noreply.github.com>"]
 readme = "readme.md"
 license = "MIT"
 homepage = "https://pypi.org/project/mdh/"
-repository = 'http://github.com/MomsFriendlyRobotCompany/mdh'
+repository = 'https://github.com/MultipedRobotics/dh'
 # documentation = "http://..."
 keywords = ["serial manipulators", "robotics", "kinematics", "dh"]
 classifiers = [
