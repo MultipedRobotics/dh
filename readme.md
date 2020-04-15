@@ -18,3 +18,4 @@ module for my needs:
 - [pybotics](https://github.com/nnadeau/pybotics)
 - [pytransform3d](https://github.com/rock-learning/pytransform3d)
 - [robopy](https://github.com/MultipedRobotics/robopy)
+- [tinyik](https://github.com/lanius/tinyik), uses `open3d` to visualize the mechanism
