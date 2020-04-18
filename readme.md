@@ -10,6 +10,13 @@
 
 [Modified Denavit-Hartenberg parameters](https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters#Modified_DH_parameters)
 
+Build kinematic chains using the modified Denavit-Hartenberg paramters
+
+- d: offset along previous z to the common normal
+- theta: angle about previous z, from old x to new x
+- a: length of the common normal, assuming a revolute joint, this is the radius about previous z.
+- alpha: angle about common normal, from old z axis to new z axis
+
 ## Inspiration
 
 You should probably use one of these, they inspired me to write a simpler
