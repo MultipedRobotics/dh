@@ -1,7 +1,9 @@
 import pytest
+import mdh
+from mdh.models import puma500
 
-def test_dummy():
-    assert True
+# def test_dummy():
+#     assert True
 
 # @pytest.mark.xfail
 # def test_dummy_2():

@@ -23,8 +23,8 @@ You should probably use one of these, they inspired me to write a simpler
 module for my needs:
 
 - [pybotics](https://github.com/nnadeau/pybotics)
-- [pytransform3d](https://github.com/rock-learning/pytransform3d)
-- [robopy](https://github.com/MultipedRobotics/robopy)
+- [pytransform3d](https://github.com/rock-learning/pytransform3d), some matplotlib 3d examples
+- [robopy](https://github.com/adityadua24/robopy), has some good matplotlib 3d examples, but seems rather brittle and difficult to work with
 - [tinyik](https://github.com/lanius/tinyik), uses `open3d` to visualize the mechanism
 
 ## Example

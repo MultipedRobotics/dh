@@ -20,13 +20,15 @@ class KinematicChain(Sized, Iterable):
     _links = attr.ib(type=Sequence[Any])
 
     def __len__(self):
+        """Enables the length function, returns number links"""
         return len(self._links)
 
     def __iter__(self):
+        """Enables iteration of joints:  for j in chain: print(j)"""
         for l in self._links:
             yield l
 
-    def transform(self, joints: Sequence[float]):
+    def transform(self, joints):
         """Calculates the transformation and returns a 4x4 matrix"""
         if len(joints) != len(self._links):
             raise Exception("inputs don't equal number of links")
@@ -39,7 +41,7 @@ class KinematicChain(Sized, Iterable):
             # t = np.dot(m, t)
         return t
 
-    def forward(self, joints: Sequence[float]):
+    def forward(self, joints):
         """value?
         Solve the forward kinematics and returns a 4x4 matrix
         """

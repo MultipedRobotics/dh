@@ -1,6 +1,8 @@
 try:
+    # 3.8
     from importlib.metadata import version # type: ignore
 except ImportError:
+    # <= 3.7
     from importlib_metadata import version # type: ignore
 
 # will this work?

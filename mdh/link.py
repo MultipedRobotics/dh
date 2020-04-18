@@ -6,19 +6,19 @@ import numpy as np # type: ignore
 JointType =  IntFlag('JointType', 'revolute prismatic revolute_theda revolute_alpha')
 mdh_params = namedtuple("mdh_params", "alpha a theta d type")
 
-@attr.s
-class Link:
-    """
-    why? what is the value of this?
-    prismatic/revolute have parameters that never chance ... need to freeze them!
-    """
-    # alpha = attr.ib(type=float)
-    # a = attr.ib(type=float)
-    # theta = attr.ib(type=float)
-    # d = attr.ib(type=float)
+# @attr.s
+# class Link:
+#     """
+#     why? what is the value of this?
+#     prismatic/revolute have parameters that never chance ... need to freeze them!
+#     """
+#     # alpha = attr.ib(type=float)
+#     # a = attr.ib(type=float)
+#     # theta = attr.ib(type=float)
+#     # d = attr.ib(type=float)
 
-@attr.s
-class RevoluteLink(Link):
+@attr.s(slots=True)
+class RevoluteLink:
     """
     RevoluteLink about theta. All other parameters (alpha, a, d) are fixed and
     cannot be changed once the link is created.
@@ -27,6 +27,8 @@ class RevoluteLink(Link):
     _a = attr.ib(type=float)
     theta = attr.ib(type=float)
     _d = attr.ib(type=float)
+    min = attr.ib(-np.pi, type=float)
+    max = attr.ib(np.pi, type=float)
 
     @property
     def alpha(self) -> float:
@@ -40,9 +42,9 @@ class RevoluteLink(Link):
     def d(self) -> float:
         return self._d
 
-    # max/min limits of link for optimzation
-    min = attr.ib(-np.pi, type=float)
-    max = attr.ib(np.pi, type=float)
+    @property
+    def type(self):
+        return JointType.revolute
 
     """Some of these params are immutable, how do I do that?"""
     def transform(self, angle: float):
@@ -69,7 +71,11 @@ class RevoluteLink(Link):
 
         return transform
 
-@attr.s
-class Prismatic(Link):
-    min = attr.ib(type=float)
-    max = attr.ib(type=float)
+# @attr.s
+# class Prismatic:
+#     min = attr.ib(type=float)
+#     max = attr.ib(type=float)
+#
+#     @property
+#     def type(self):
+#         return JointType.revolute
