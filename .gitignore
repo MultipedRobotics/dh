@@ -8,3 +8,5 @@ dist
 .ipynb_checkpoints
 __pycache__
 .mypy_*
+*.lock
+
