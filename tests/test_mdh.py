@@ -3,7 +3,7 @@ import mdh
 import sys
 from mdh.link import mdh_params, JointType
 from mdh.kinematic_chain import KinematicChain
-from mdh.robots import puma560
+# from mdh.robots import puma560
 
 # def test_dummy():
 #     assert True
