@@ -1,6 +1,9 @@
 import pytest
 import mdh
-from mdh.models import puma500
+import sys
+from mdh.link import mdh_params, JointType
+from mdh.kinematic_chain import KinematicChain
+from mdh.robots import puma560
 
 # def test_dummy():
 #     assert True
@@ -21,5 +24,8 @@ class BobError(Exception):
     pass
 
 def test_exception_2():
+    print(mdh.__version__)
+    for s in sys.path:
+        print(s)
     with pytest.raises(BobError):
         raise BobError

@@ -14,13 +14,14 @@ print(f">> {version}")
 np.set_printoptions(suppress=True)
 
 def kevin():
+    mm = pi
     """alpha a theta d"""
     dh = [
-        {'alpha': 0,  'a': 0, 'theta': 0, 'd': 0, 'type': 1},
-        {'alpha': pi/2, 'a': 52, 'theta': 0, 'd': 0, 'type': 1},
-        {'alpha': 0, 'a': 89, 'theta': 0, 'd': 0, 'type': 1},
-        {'alpha': 0, 'a': 90, 'theta': 0, 'd': 0, 'type': 1},
-        {'alpha': 0, 'a': 95, 'theta': 0, 'd': 0, 'type': 1}
+        {'alpha':    0, 'a':  0, 'theta': 0, 'd': 0, 'type': 1, "max_min": [mm,-mm]},
+        {'alpha': pi/2, 'a': 52, 'theta': 0, 'd': 0, 'type': 1, "max_min": [mm,-mm]},
+        {'alpha':    0, 'a': 89, 'theta': 0, 'd': 0, 'type': 1, "max_min": [mm,-mm]},
+        {'alpha':    0, 'a': 90, 'theta': 0, 'd': 0, 'type': 1, "max_min": [mm,-mm]},
+        {'alpha':    0, 'a': 95, 'theta': 0, 'd': 0, 'type': 1, "max_min": [mm,-mm]}
     ]
 
     return dh
@@ -38,10 +39,10 @@ def main():
         np.deg2rad([-45.00, 77.41, -98.15, -69.27, 0]) # 110, -110, -40
     ]
 
-    # for jj in j:
-    #     # print(jj)
-    #     t = kc.transform(jj)
-    #     print(t)
+    for jj in j:
+        # print(jj)
+        t = kc.transform(jj)
+        print(t)
     #     print("----------------------")
 
     j = [

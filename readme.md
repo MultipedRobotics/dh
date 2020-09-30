@@ -32,6 +32,7 @@ module for my needs:
 ```python
 import numpy as np
 from mdh.kinematic_chain import KinematicChain
+from mdh import UnReachable # exception
 
 # make it print better
 np.set_printoptions(suppress=True)

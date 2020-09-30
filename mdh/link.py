@@ -2,9 +2,13 @@ import attr
 from collections import namedtuple
 from enum import IntFlag
 import numpy as np # type: ignore
+np.set_printoptions(suppress=True)
 
 JointType =  IntFlag('JointType', 'revolute prismatic revolute_theda revolute_alpha')
 mdh_params = namedtuple("mdh_params", "alpha a theta d type")
+
+from math import pi
+rad2deg = pi/180
 
 # @attr.s
 # class Link:
@@ -27,8 +31,8 @@ class RevoluteLink:
     _a = attr.ib(type=float)
     theta = attr.ib(type=float)
     _d = attr.ib(type=float)
-    min = attr.ib(-np.pi, type=float)
-    max = attr.ib(np.pi, type=float)
+    min = attr.ib(init=False, default=-np.pi/2, type=float)
+    max = attr.ib(init=False, default=np.pi/2, type=float)
 
     @property
     def alpha(self) -> float:
@@ -70,6 +74,12 @@ class RevoluteLink:
         )
 
         return transform
+
+    def __str__(self):
+        aa = self._alpha*rad2deg
+        t = self.theta*rad2deg
+        s = f"Revolute: alpha: {aa:4.1f}deg a: {self.a:4.1f}m theta: {t:4.1}deg d: {self.d:4.1f}"
+        return s
 
 # @attr.s
 # class Prismatic:

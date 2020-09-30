@@ -9,3 +9,5 @@ except ImportError:
 __version__ = version("mdh")
 __author__ = "Kevin J. Walchko"
 __license__ = "MIT"
+
+from .kinematic_chain import UnReachable
