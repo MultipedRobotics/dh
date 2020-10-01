@@ -1,6 +1,6 @@
 import numpy as np # type: ignore
 import attr
-from typing import Any, Optional, Sequence, Sized, Union, Iterable, Dict, List
+# from typing import Any, Optional, Sequence, Sized, Union, Iterable, Dict, List
 # import scipy # type: ignore
 import scipy.optimize # type: ignore
 # from numpy.linalg import norm
@@ -21,12 +21,16 @@ class UnReachable(Exception):
     pass
 
 @attr.s
-class KinematicChain(Sized, Iterable):
-    _links = attr.ib(type=Sequence[Any])
+# class KinematicChain(Sized, Iterable):
+class KinematicChain:
+    # _links = attr.ib(type=Sequence[Any])
+    _links = attr.ib()
+    _size = attr.ib()
 
     def __len__(self):
         """Enables the length function, returns number links"""
-        return len(self._links)
+        # return len(self._links)
+        return self._size
 
     def __iter__(self):
         """Enables iteration of joints:  for j in chain: print(j)"""
@@ -39,8 +43,8 @@ class KinematicChain(Sized, Iterable):
 
     def transform(self, joints):
         """Calculates the transformation and returns a 4x4 matrix"""
-        if len(joints) != len(self._links):
-            raise Exception("inputs don't equal number of links")
+        if len(joints) != self.size:
+            raise Exception(f"inputs don't equal number of links {len(joints)} != {self.size}")
 
         t = np.eye(4)
         for l, q in zip(reversed(self._links), reversed(joints)):
@@ -63,14 +67,14 @@ class KinematicChain(Sized, Iterable):
 
             FIXME: this only works for when the foot is straight down
             """
-            j = [[],[]] # type: Sequence[List]
+            joint_limits = [[],[]] # type: Sequence[List]
             for l in self:
-                j[0].append(l.min)
-                j[1].append(l.max)
-            # j[0][3] = -0.00001
-            # j[1][3] = 0.00001
-
-            joint_limits = np.array(j) # type: np.ndarray
+                joint_limits[0].append(l.min)
+                joint_limits[1].append(l.max)
+            # # j[0][3] = -0.00001
+            # # j[1][3] = 0.00001
+            # joint_limits = j
+            # joint_limits = np.array(j) # type: np.ndarray
             # print(joint_limits)
 
             # r = R.from_matrix([[1,0,0],[0,0,-1],[0,1,0]])
@@ -79,12 +83,12 @@ class KinematicChain(Sized, Iterable):
 
             # make desired transform pose (position, oritentation)
             # change the -90 x-axis to something else for non-down??
-            x = pos[0]
-            y = pos[1]
-            c = R.from_euler('zyx', [-90,atan2(y,x)*180/pi,90], degrees=True)
-            ppos = np.eye(4)
-            ppos[:3,:3] = c.as_matrix()
-            ppos[:3, 3] = pos
+            # x = pos[0]
+            # y = pos[1]
+            # c = R.from_euler('zyx', [-90,atan2(y,x)*180/pi,90], degrees=True)
+            # ppos = np.eye(4)
+            # ppos[:3,:3] = c.as_matrix()
+            # ppos[:3, 3] = pos
 
             start = [0]*len(self._links)
 
@@ -92,52 +96,68 @@ class KinematicChain(Sized, Iterable):
                 fun=_ik_cost_function,
                 x0=np.array(start),
                 bounds=joint_limits,
-                args=(ppos, self)
-            )  # type: scipy.optimize.OptimizeResult
+                args=(pos, self)
+            )
 
             if not result.success:  # pragma: no cover
                 raise UnReachable(f"Can't reach: {pos}m")
             # print(">> yeah!!!")
             # print(">>", np.rad2deg(result.x))
             actual_t = self.transform(result.x)
-            actual_pos = actual_t[:3,3]
+            actual_pos = actual_t #actual_t[:3,3]
             if np.allclose(actual_pos, pos, atol=1e-3):
                 # print(result)
                 return result.x
 
             raise UnReachable(f"Can't reach: {pos}")
 
+    @property
+    def size(self):
+        return self._size
+
     @classmethod
     def from_parameters(cls, params):
         """Builds a KinematicChain object from an input"""
         links = []
+        size = 0
         for l in params:
             if not isinstance(l, dict):
                 raise Exception(f"Invalid parameters: {l}")
 
-            for key in ['alpha', 'a', 'theta', 'd', 'type']:
+            for key in ['alpha', 'a', 'theta', 'd']:
                 if key not in l:
                     raise Exception(f"Missing parameter: {key}")
 
-            ll = mdh_params(l['alpha'], l['a'], l['theta'], l['d'], l['type'])
+            # ll = mdh_params(l['alpha'], l['a'], l['theta'], l['d'])
+            # print(f">> params: {ll}")
+            # print(l['alpha'])
 
-            if ll.type == JointType.revolute:
-                link = RevoluteLink(a=ll.a, alpha=ll.alpha, d=ll.d, theta=ll.theta)
-            elif ll.type == JointType.prismatic:
-                raise NotImplementedError(f"from_parameters: {l.type}")
-            else:
-                raise Exception(f"Invalid parameter: {l.type}")
+            # if ll.type == JointType.revolute:
+            # link = RevoluteLink(a=ll.a, alpha=ll.alpha, d=ll.d, theta=ll.theta)
+            # link = RevoluteLink(alpha=ll.alpha, a=ll.a, theta=ll.theta, d=ll.d)
+            link = RevoluteLink(l['alpha'], l['a'], l['theta'], l['d'])
+            # elif ll.type == JointType.prismatic:
+            #     raise NotImplementedError(f"from_parameters: {l.type}")
+            # else:
+            #     raise Exception(f"Invalid parameter: {l.type}")
 
-            if "max_min" in l:
-                link.min = l["max_min"][1]
-                link.max = l["max_min"][0]
-            else:
-                link.min = -pi
-                link.max = pi
+            # if "max_min" in l:
+            #     link.min = l["max_min"][1]
+            #     link.max = l["max_min"][0]
+            # else:
+            link.min = -pi
+            link.max = pi
 
             links.append(link)
 
-        ret = cls(links)
+            # if 'fixed' in l:
+            #     if l['fixed'] is not True:
+            #         size += 1
+            # else:
+            #     size += 1
+            size += 1
+
+        ret = cls(links, size)
 
         return ret
 

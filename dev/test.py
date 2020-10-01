@@ -31,18 +31,18 @@ def main():
     t = kevin()
     kc = KinematicChain.from_parameters(t)
 
-    j = [
-        [0,0,0,0,0],
-        [0,pi/4,-pi/4,-pi/2,0], # 204, 0, -32
-        # [0,0,-pi/2,0,0],
-        # np.deg2rad([90,131.17,-106.19,-114.98]),
-        np.deg2rad([-45.00, 77.41, -98.15, -69.27, 0]) # 110, -110, -40
-    ]
+    # j = [
+    #     [0,0,0,0,0],
+    #     [0,pi/4,-pi/4,-pi/2,0], # 204, 0, -32
+    #     # [0,0,-pi/2,0,0],
+    #     # np.deg2rad([90,131.17,-106.19,-114.98]),
+    #     np.deg2rad([-45.00, 77.41, -98.15, -69.27, 0]) # 110, -110, -40
+    # ]
 
-    for jj in j:
-        # print(jj)
-        t = kc.transform(jj)
-        print(t)
+    # for jj in j:
+    #     # print(jj)
+    #     t = kc.transform(jj)
+    #     print(t)
     #     print("----------------------")
 
     j = [
@@ -53,7 +53,13 @@ def main():
     ]
 
     for jj in j:
-        rads = kc.inverse(jj)
+        p = np.array([
+            [0,1,0, jj[0]],
+            [0,0,-1,jj[1]],
+            [-1,0,0,jj[2]],
+            [0,0,0,1]
+        ])
+        rads = kc.inverse(p)
         print(">>", np.rad2deg(rads))
 
 
