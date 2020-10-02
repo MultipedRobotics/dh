@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mdh"
-version = "0.1.2"
+version = "0.1.3"
 description = "modified dh"
 authors = ["walchko <walchko@users.noreply.github.com>"]
 readme = "readme.md"
