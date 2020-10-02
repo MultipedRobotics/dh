@@ -10,6 +10,8 @@
 
 [Modified Denavit-Hartenberg parameters](https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters#Modified_DH_parameters)
 
+**Work in progress, use one the other libraries below (Inspiration)**
+
 Build kinematic chains using the modified Denavit-Hartenberg paramters
 
 - d: offset along previous z to the common normal
