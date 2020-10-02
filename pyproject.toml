@@ -8,7 +8,7 @@ license = "MIT"
 homepage = "https://pypi.org/project/mdh/"
 repository = 'https://github.com/MultipedRobotics/dh'
 # documentation = "http://..."
-keywords = ["serial manipulators", "robotics", "kinematics", "dh"]
+keywords = ["serial manipulators", "robotics", "kinematics", "dh", "denavit", "hartenberg", "denavit–hartenberg"]
 classifiers = [
     'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
@@ -30,11 +30,11 @@ python = ">=3.6"
 numpy = ">=1.9"
 scipy = ">=1.0"
 importlib-metadata = {version="*", python="<3.8"}
-# attrs = ">=19.0"
+attrs = "*"
+colorama = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
-# mypy = "*"
 
 [build-system]
 requires = ["poetry>=0.12"]
